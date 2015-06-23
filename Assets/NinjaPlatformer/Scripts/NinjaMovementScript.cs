@@ -562,6 +562,8 @@ public class NinjaMovementScript : MonoBehaviour {
 		}
 		else
 		{
+			GameController.Instance.stopCameraFollow();
+
 			Particles_DeathBoom.Emit (50);
 			
 			//Send message to MainEventsLog. First checks if the reference path is set. If not, it will MainEventsLog from the scene.

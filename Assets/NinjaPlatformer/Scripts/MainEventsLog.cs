@@ -28,7 +28,7 @@ public class MainEventsLog : MonoBehaviour {
 	public void PlayerDied(){
 
 		//Camera will stop for a second when the player dies.
-		CameraFollowScript.PlayerDied ();
+		//CameraFollowScript.PlayerDied ();
 
 		AudioSource_Death.Play ();
 		Debug.Log ("Player died");
