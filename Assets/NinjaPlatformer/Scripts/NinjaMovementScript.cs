@@ -547,6 +547,8 @@ public class NinjaMovementScript : MonoBehaviour {
 
 	public void NinjaDies(){
 
+		GameController.Instance.stopCameraFollow();
+
 		curLife++;
 		if(curLife>PlayerLife)
 		{
@@ -562,15 +564,29 @@ public class NinjaMovementScript : MonoBehaviour {
 		{
 			Particles_DeathBoom.Emit (50);
 			
-			this.gameObject.transform.position = ActiveCheckpoint.transform.position;
-			this.rigidbody2D.velocity = Vector2.zero;
-			
 			//Send message to MainEventsLog. First checks if the reference path is set. If not, it will MainEventsLog from the scene.
 			if(MainEventsLog_script == null){
 				MainEventsLog_script = GameObject.FindGameObjectWithTag("MainEventLog").GetComponent<MainEventsLog>();
 			}
 			MainEventsLog_script.PlayerDied();
+
+			this.gameObject.transform.position=new Vector3(1000,1000,this.gameObject.transform.position.z);
+			this.rigidbody2D.velocity = Vector2.zero;
+			this.rigidbody2D.isKinematic=true;
+
+
+
+			Invoke("NinjaRelive",1.5f);
 		}
+	}
+
+	private void NinjaRelive()
+	{
+		this.rigidbody2D.isKinematic=false;
+		this.gameObject.transform.position = ActiveCheckpoint.transform.position;
+		this.rigidbody2D.velocity = Vector2.zero;
+
+		GameController.Instance.startCameraFollow();
 	}
 
 	public void NinjaKilledEnemy(){

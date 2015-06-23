@@ -61,6 +61,7 @@ public class GameController : UnitySceneSinglton<GameController> {
 	{
 		GameOverBoard.DOLocalMoveY(37f,1f).SetEase(Ease.InCirc).OnComplete(()=>{
 			showStar(3);
+			LevelController.Instance.CompleteLevel(3);
 		});
 		timer.Stop();
 	}
@@ -86,5 +87,15 @@ public class GameController : UnitySceneSinglton<GameController> {
 	{
 		PlayerStandLevel=standLv;
 		cmFollowTarget.startToMoveY(height);
+	}
+
+	public void stopCameraFollow()
+	{
+		cmFollowTarget.stopFollow();
+	}
+
+	public void startCameraFollow()
+	{
+		cmFollowTarget.startFollow();
 	}
 }

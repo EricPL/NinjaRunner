@@ -60,7 +60,7 @@ public class CameraFollowTarget : MonoBehaviour {
 	//Here you can set camera delay for the Ninja death.
 	public void PlayerDied(){
 		PlayerJustDied = true;
-		Invoke ("BackToBusiness", 0.05f);
+		//Invoke ("BackToBusiness", 0.05f);
 	}
 
 	//Camera follow back ON.
@@ -77,5 +77,15 @@ public class CameraFollowTarget : MonoBehaviour {
 	{
 		targetYPos=hh;
 		isYMove=true;
+	}
+
+	public void stopFollow()
+	{
+		PlayerJustDied=true;
+	}
+
+	public void startFollow()
+	{
+		PlayerJustDied=false;
 	}
 }
