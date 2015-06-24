@@ -70,6 +70,8 @@ public class Enemy_FlyingA : MonoBehaviour {
 				EnemyDead = true;
 				Debug.Log ("Monster died");
 
+				GameController.Instance.addKill();
+
 				Invoke("iDied",0.15f);
 			}else{
 				PlayerScript.NinjaDies();

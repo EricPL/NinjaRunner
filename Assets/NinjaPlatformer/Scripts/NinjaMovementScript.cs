@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -76,12 +77,14 @@ public class NinjaMovementScript : MonoBehaviour {
 
 	public int PlayerLife=3;
 	private int curLife=1;
+	public Text PlayerLifeText;
 
 	
 	// Use this for initialization
 	void Start () {
 
 		curLife=1;
+		PlayerLifeText.text="x "+PlayerLife.ToString();
 
 		GroundedToObjectsList = new List<GameObject> ();
 		WalledToObjectsList = new List<GameObject> ();
@@ -548,10 +551,12 @@ public class NinjaMovementScript : MonoBehaviour {
 	public void NinjaDies(){
 
 		GameController.Instance.stopCameraFollow();
-
+		GameController.Instance.setHasDead();
 		curLife++;
 		if(curLife>PlayerLife)
 		{
+			PlayerLifeText.text="x 0";
+
 			Particles_DeathBoom.Emit (50);
 
 			//Send message to MainEventsLog. First checks if the reference path is set. If not, it will MainEventsLog from the scene.
@@ -563,6 +568,8 @@ public class NinjaMovementScript : MonoBehaviour {
 		else
 		{
 			GameController.Instance.stopCameraFollow();
+
+			PlayerLifeText.text="x "+(PlayerLife-curLife+1).ToString();
 
 			Particles_DeathBoom.Emit (50);
 			

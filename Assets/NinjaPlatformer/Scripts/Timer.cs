@@ -55,4 +55,13 @@ public class Timer : MonoBehaviour {
 		return bminutes.ToString("00")+" : "+bseconds.ToString("00")+" : "+bminSecond.ToString("000");
 	}
 
+	public int GetTimerSecond()
+	{
+		return (int)(minutes*60+seconds);
+	}
+
+	public void hideTimer()
+	{
+		timerText.gameObject.SetActive(false);
+	}
 }

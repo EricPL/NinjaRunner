@@ -43,11 +43,14 @@ public class MainEventsLog : MonoBehaviour {
 	}
 
 	//All the Unity UI stuff is here.
-	private bool VisibleGUI = true;
-	private string GUIText_DoubleJump = "Activate Double Jump";
+//	private bool VisibleGUI = true;
+//	private string GUIText_DoubleJump = "Activate Double Jump";
 	//private string GUIText_TouchControls = "Hide Touch Controls";
 
+
+	/*
 	void OnGUI () {
+
 		if(VisibleGUI == true){
 			if(GUI.Button(new Rect(10,10,200,40), GUIText_DoubleJump)) {
 				if(NinjaMovScript.DoubleJump == true){
@@ -58,8 +61,6 @@ public class MainEventsLog : MonoBehaviour {
 					GUIText_DoubleJump = "DeActivate Double Jump";
 				}
 			}
-
-			/*
 			if(GUI.Button(new Rect(10,60,200,40), GUIText_TouchControls)) {
 				if(TouchControls.activeSelf == true){
 					TouchControls.SetActive(false);
@@ -69,19 +70,16 @@ public class MainEventsLog : MonoBehaviour {
 					GUIText_TouchControls = "Hide Touch Controls";
 				}
 			}
-			*/
 			if(GUI.Button(new Rect(10,60,100,40), "Reset Game")) {
 				//VisibleGUI = false;
 				Application.LoadLevel(Application.loadedLevel);
 			}
 		
 		}else{
-			/*
 			if(GUI.Button(new Rect(10,10,75,20), "Show UI")) {
 				VisibleGUI = true;
 			}
-			*/
 		}
 	}
-
+	*/
 }
