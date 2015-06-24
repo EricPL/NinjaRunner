@@ -15,9 +15,17 @@ public class GameController : UnitySceneSinglton<GameController> {
 	public Text coinLabel;
 	private int coinNumber;
 
+	public Text killLabel;
+	private int killEnemyNumber;
+
 	public CameraFollowTarget cmFollowTarget;
 	[HideInInspector]
 	public int PlayerStandLevel=1;
+
+	[HideInInspector]
+	public bool hasDead=false;
+
+	public int starNumber{get;set;}
 
 	void Start()
 	{
@@ -27,12 +35,17 @@ public class GameController : UnitySceneSinglton<GameController> {
 		Init();
 		TouchController.Instance.Init();
 
-		bgNumber.showBeginNumber();
+		//showBeginNumber();
 	}
 
 	void Update()
 	{
 		TouchController.Instance.TouchUpdate();
+	}
+
+	public void showBeginNumber()
+	{
+		bgNumber.showBeginNumber();
 	}
 
 	private void Init()
@@ -59,11 +72,14 @@ public class GameController : UnitySceneSinglton<GameController> {
 
 	public void showGameOver()
 	{
-		GameOverBoard.DOLocalMoveY(37f,1f).SetEase(Ease.InCirc).OnComplete(()=>{
-			showStar(3);
-			LevelController.Instance.CompleteLevel(3);
-		});
 		timer.Stop();
+		
+		LevelController.Instance.CheckMissionStatus(true);
+
+		GameOverBoard.DOLocalMoveY(37f,1f).SetEase(Ease.InCirc).OnComplete(()=>{
+			showStar(starNumber);
+			LevelController.Instance.CompleteLevel(starNumber);
+		});
 	}
 
 	public void showGameLose()
@@ -76,6 +92,16 @@ public class GameController : UnitySceneSinglton<GameController> {
 	{
 		coinNumber++;
 		coinLabel.text="x "+coinNumber.ToString();
+
+		LevelController.Instance.CheckMissionStatus(false);
+	}
+
+	public void addKill()
+	{
+		killEnemyNumber++;
+		killLabel.text="x "+killEnemyNumber.ToString();
+
+		LevelController.Instance.CheckMissionStatus(false);
 	}
 
 	public void showStar(int starGetNumber)
@@ -97,5 +123,49 @@ public class GameController : UnitySceneSinglton<GameController> {
 	public void startCameraFollow()
 	{
 		cmFollowTarget.startFollow();
+	}
+
+	public int GetUseTime()
+	{
+		return timer.GetTimerSecond();
+	}
+
+	public int GetCollectNumber()
+	{
+		return coinNumber;
+	}
+
+	public bool GetHadDead()
+	{
+		return hasDead;
+	}
+
+	public int GetKillEnemyNumber()
+	{
+		return killEnemyNumber;
+	}
+
+	public void hideTimer()
+	{
+		timer.hideTimer();
+	}
+
+	public void hideCollectLabel()
+	{
+		coinLabel.transform.parent.gameObject.SetActive(false);
+	}
+
+	public void hideKillLabel()
+	{
+		killLabel.transform.parent.gameObject.SetActive(false);
+	}
+
+	public void setHasDead()
+	{
+		if(!hasDead)
+		{
+			hasDead=true;
+			LevelController.Instance.noDieFailEffect();
+		}
 	}
 }

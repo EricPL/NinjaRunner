@@ -25,7 +25,7 @@ public class BeginNumber : MonoBehaviour {
 	{
 		Sequence effectSeq=DOTween.Sequence();
 
-		effectSeq.Append(beginNumberTrs[0].DOLocalMoveY(2.5f,downTime).SetEase(downEase).SetDelay(1f));
+		effectSeq.Append(beginNumberTrs[0].DOLocalMoveY(2.5f,downTime).SetEase(downEase).SetDelay(0.1f));
 		//effectSeq.AppendInterval(pauseTime);
 		effectSeq.Append(beginNumberTrs[0].DOPunchRotation(new Vector3(0,0,10),pauseTime,20,1));
 		effectSeq.Append(beginNumberTrs[0].DOScale(Vector3.zero,disappearTime).SetEase(disappearEase));
