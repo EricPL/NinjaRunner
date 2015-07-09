@@ -31,11 +31,12 @@ public class GameController : UnitySceneSinglton<GameController> {
 	{
 		DOTween.Init();
 
-		//Init all controller
+		//Init all controller here
 		Init();
 		TouchController.Instance.Init();
 
-		//showBeginNumber();
+
+		//showBeginNumber();  Remove since add mission feature
 	}
 
 	void Update()
